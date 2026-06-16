@@ -49,15 +49,31 @@ def predict(glucose, haemoglobin, cholesterol):
 
     except Exception as e:
         # Fallback logic if Gemini fails
-        if glucose > 140:
+
+        # Glucose risks
+        if glucose > 180:
+            return "Severe Diabetes Risk"
+        elif glucose > 140:
             return "High Diabetes Risk"
+        elif glucose < 70:
+            return "Low Blood Sugar Risk"
+
+        # Cholesterol risks
         elif cholesterol > 240:
-            return "Heart Disease Risk"
+            return "High Heart Risk"
+        elif cholesterol < 120:
+            return "Low Cholesterol Risk"
+
+        # Haemoglobin risks
         elif haemoglobin < 12:
-            return "Possible Anaemia"
+            return "Anaemia Risk"
+        elif haemoglobin > 18:
+            return "Thick Blood Risk"
+
+        # Normal range
         else:
-            return "Healthy"
-        
+            return "Normal Health Status"
+                
 st.title("Health Prediction Application")
 
 # Input Fields
